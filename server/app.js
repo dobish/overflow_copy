@@ -65,7 +65,7 @@ app.get('*', (req, res) =>
 );
 
 /**** Start ****/
-const url = (process.env.MONGO_URL || "mongodb://localhost/kitten_db" );
+const url = (process.env.MONGO_URL || "" );
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(async () => {
         await kittenDAL.bootstrap(); // Fill in test data if needed.
