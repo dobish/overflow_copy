@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
+const dotenv = require('dotenv').config();
 
 /**** Configuration ****/
 const port = (process.env.PORT || 8080);
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.json()); // Parse JSON from the request body
 app.use(morgan('combined')); // Log all requests to the console
 app.use(express.static('../client/build')); // Only needed when running build in production mode
+
 
 /**** Database ****/
 // The "Kitten Data Access Layer".
@@ -65,7 +67,7 @@ app.get('*', (req, res) =>
 );
 
 /**** Start ****/
-const url = (process.env.MONGO_URL || "" );
+const url = (process.env.MONGO_URL || "mongodb://localhost/kitten_db" );
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(async () => {
         await kittenDAL.bootstrap(); // Fill in test data if needed.
