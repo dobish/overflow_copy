@@ -1,11 +1,14 @@
 {
-  "name": "stackoverflow",
+  "name": "mandatory_do_together",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "@reach/router": "^1.2.1",
+    "mongodb": "^3.3.3",
+    "mongoose": "^5.7.7",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
