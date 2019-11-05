@@ -24,7 +24,7 @@ class App extends Component {
     }
 
   getData() {
-    const url = 'http://localhost:8080/api/kittens';
+    const url = (process.env.MONGO_URL || "mongodb://localhost/kitten_db" );
     fetch(url)
         .then(result => result.json()) // Convert to JSON
         .then(result => { // Put it in the state
@@ -44,7 +44,7 @@ class App extends Component {
   }
 
     postData(question) {
-        const url = 'http://localhost:8080/api/kittens';
+        const url = (process.env.MONGO_URL || "mongodb://localhost/kitten_db" );
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({
