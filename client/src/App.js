@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 
 class App extends Component {
 
-    API_URL = process.env.REACT_APP_API_URL;
+API_URL = process.env.REACT_APP_API_URL;
 
   constructor(props) {
     super(props);
