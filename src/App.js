@@ -25,7 +25,7 @@ class App extends Component {
     }
 
   getData() {
-    const url = (process.env.MONGO_URL || "http://localhost:8080/api/kittens" );
+    const url = ("/api/kittens");
     fetch(url)
         .then(result => result.json()) // Convert to JSON
         .then(result => { // Put it in the state
