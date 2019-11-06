@@ -11,6 +11,8 @@ const mongoose = require('mongoose');
 
 class App extends Component {
 
+    API_URL = process.env.REACT_APP_API_URL;
+
   constructor(props) {
     super(props);
 
@@ -25,7 +27,8 @@ class App extends Component {
     }
 
   getData() {
-    const url = ("http://localhost:8080/api/kittens" );
+      let url = `${this.API_URL}/kittens`; // URL of the API.
+      console.log(url)
     fetch(url)
         .then(result => result.json()) // Convert to JSON
         .then(result => { // Put it in the state
@@ -45,7 +48,7 @@ class App extends Component {
   }
 
     postData(question) {
-        const url = (process.env.MONGO_URL || "http://localhost:8080/api/kittens" );
+        let url = `${this.API_URL}/kittens`; // URL of the API.;
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({
