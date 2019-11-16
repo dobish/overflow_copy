@@ -58,3 +58,10 @@ input {
     outline: none;
     transition: all 0.2s ease-in-out;
 }
+
+.answers{
+    background-color: beige;
+    margin-bottom: 5% !important;
+    margin-top: 5% !important;
+}
+

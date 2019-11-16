@@ -81,6 +81,25 @@ API_URL = process.env.REACT_APP_API_URL;
         this.postData(question);
     };
 
+    // post new comments
+    postComment(id, text) {
+        let url = `${this.API_URL}/kittens/${id}/answers/`;
+
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                answer: text
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(() => {
+                this.getData();
+            });
+    }
+
 
 
   render() {
@@ -93,7 +112,9 @@ API_URL = process.env.REACT_APP_API_URL;
                        askQuestion={(text) => this.askQuestion(text)}>
             </Questions>
             <Question path="/api/kittens/:id"
-                      getQuestion={(_id) => this.getQuestion(_id)}>
+                      getQuestion={(_id) => this.getQuestion(_id)}
+                      postComment={(id, text) => this.postComment(id, text)}
+            >
 
             </Question>
           </Router>

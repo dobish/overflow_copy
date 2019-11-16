@@ -24,11 +24,13 @@ class Db {
         }
     }
 
-    async getAnswers(id) {
+    async getAnswers(question, answersId) {
         try {
-            console.log("id = " + id);
-            console.log(this.kittenModel.findById(id));
-            return await this.kittenModel.findById(id);
+            //console.log("id = " + id);
+            //console.log("getAnswer 2" + answersId)
+            console.log("getAnswers" + question.answers.find(comment => comment._id == answersId));
+            return question.answers.find(comment => comment._id == answersId);
+
             //return await this.kittenModel.findById(id);
         } catch (error) {
             console.error("getAnswers:", error.message);
@@ -52,10 +54,38 @@ class Db {
         return kitten.save();
     }
 
+    async addComment(id, comment) {
+        const question = await this.getKitten(id);
+        comment.votes = 0;
+        question.answers.push(comment);
+
+        try {
+            return question.save();
+        } catch (error) {
+            console.error("addComment:", error.message);
+            return {};
+        }
+    }
+
     async updateVotes(votesId, newVotes){
         let votes = await this.getKitten(votesId);
         votes.votes.update(newVotes);
         return votes.save();
+    }
+
+    async votes(id, answersId) {
+        // TODO: Error handling
+        const question = await this.getKitten(id);
+        let comment = await this.getAnswers(question, answersId);
+        //console.log(question.answers.votes)
+        comment.votes = comment.votes + 1;
+
+        console.log(this.getAnswers(question, answersId))
+        //console.log("votes comment " + comment.votes.toString())
+        console.log("votes question " + question.answers[0].votes)
+
+//console.log(question.save())
+        return question.save();
     }
 
     async addHobby(kittenId, hobby) {

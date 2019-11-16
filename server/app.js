@@ -47,18 +47,23 @@ app.post('/api/kittens', (req, res) => {
     //console.log(req.body.answers)
 });
 
-app.put('/api/kittens/:id', (req, res) => {
-    let votes = {
-        votes: req.body.answers.votes
-    };
-kittenDAL.updateVotes(req.params.id, req.params.votes).then(updatedVotes => res.json(updatedVotes));
+app.post('/api/kittens/:id/answers', (req, res) => {
+    kittenDAL
+        .addComment(req.params.id, req.body)
+        .then(updatedquestion => res.json(updatedquestion));
 });
 
-app.post('/api/kittens/:id/hobbies', (req, res) => {
-    // To add a hobby, you need the id of the kitten, and some hobby text from the request body.
-    kittenDAL.addHobby(req.params.id, req.body.hobby)
-        .then(updatedKitten => res.json(updatedKitten));
+
+
+app.put('/api/kittens/:id/answers/:answersId/', (req, res) => {
+    kittenDAL
+        .votes(req.params.id, req.params.answersId)
+        .then(updateVotes => res.json(updateVotes));
+    //console.log(updateVotes => res.json(updateVotes))
+//kittenDAL.updateVotes(req.params.id, req.params.votes).then(updatedVotes => res.json(updatedVotes));
 });
+
+
 
 // "Redirect" all get requests (except for the routes specified above) to React's entry point (index.html) to be handled by Reach router
 // It's important to specify this route as the very last one to prevent overriding all of the other routes
