@@ -38,6 +38,8 @@ class Db {
         }
     }
 
+
+
     async getKitten(id) {
         try {
             //console.log(this.kittenModel.findById(id));

@@ -101,6 +101,24 @@ API_URL = process.env.REACT_APP_API_URL;
     }
 
 
+    async votes(id, answersId) {
+        let url = `${this.API_URL}/kittens/${id}/answers/${answersId}`;
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(() => {
+                this.getData();
+            });
+    }
+
+
+    handleVote(id, answersId) {
+        this.votes(id, answersId);
+    }
 
   render() {
     return (
@@ -113,6 +131,7 @@ API_URL = process.env.REACT_APP_API_URL;
             </Questions>
             <Question path="/api/kittens/:id"
                       getQuestion={(_id) => this.getQuestion(_id)}
+                      handleVote={(id, commentId) => this.handleVote(id, commentId)}
                       postComment={(id, text) => this.postComment(id, text)}
             >
 
